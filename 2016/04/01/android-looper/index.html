@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>luffy | One Piece</title>
+  <title>android-looper | One Piece</title>
   <meta name="author" content="TiaorongWu">
   
-  <meta name="description" content="我是蒙奇D路飞，要成为海贼王的男人
-我是要成为海贼王的男人-路飞这是路飞的口头禅，从小被爷爷训练教育要当海兵，甚至穿着海军服的路飞，却在遇到红发以后，立志要当海贼，而且要成为海贼王，在他看来，这是自由，无拘无束，可以认识很多朋友，大家一起开心地开宴会。遇到艾斯，萨博以后，他变得坚强，勇敢了，也更加坚">
+  <meta name="description" content="###1、线程间通信机制首先，looper、handler、messagequeue三者共同实现了android系统里线程间通信机制。如在A、B两个子线程之间需要传递消息，首先给每个子线程绑定一套handler、looper、messagequeue机制，然后这三个对象都与其所属线程对应。然后A线程">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="luffy"/>
+  <meta property="og:title" content="android-looper"/>
   <meta property="og:site_name" content="One Piece"/>
 
   
@@ -72,10 +71,10 @@
   <div class="post-content">
     <header>
       
-      <time datetime="2016-03-29T12:25:34.000Z"><a href="/2016/03/29/luffy/">Tue, Mar 29 2016, 8:25:34 pm</a></time>
+      <time datetime="2016-04-01T12:11:26.000Z"><a href="/2016/04/01/android-looper/">Fri, Apr 1 2016, 8:11:26 pm</a></time>
 
   
-    <h1 class="title">luffy</h1>
+    <h1 class="title">android-looper</h1>
   
 
 
@@ -85,9 +84,9 @@
     </header>
     <div class="entry">
       
-        <h1 id="我是蒙奇D路飞，要成为海贼王的男人"><a href="#我是蒙奇D路飞，要成为海贼王的男人" class="headerlink" title="我是蒙奇D路飞，要成为海贼王的男人"></a>我是蒙奇D路飞，要成为海贼王的男人</h1><blockquote>
-<p>我是要成为海贼王的男人-路飞<br><img src="http://b.zol-img.com.cn/desk/bizhi/image/2/960x600/1360207976654.jpg" alt=""><br>这是路飞的口头禅，从小被爷爷训练教育要当海兵，甚至穿着海军服的路飞，却在遇到红发以后，立志要当海贼，而且要成为海贼王，在他看来，这是自由，无拘无束，可以认识很多朋友，大家一起开心地开宴会。遇到艾斯，萨博以后，他变得坚强，勇敢了，也更加坚定了他的梦想。</p>
-</blockquote>
+        <p>###1、线程间通信机制<br>首先，looper、handler、messagequeue三者共同实现了android系统里线程间通信机制。<br>如在A、B两个子线程之间需要传递消息，首先给每个子线程绑定一套handler、looper、<br>messagequeue机制，然后这三个对象都与其所属线程对应。然后A线程通过调用B线程的<br>Handler对象，发送消息。这个消息会被Handler发送到B线程的messagequeue中，而属于<br>B线程的Looper对象一直在for循环里无限遍历MessageQueue, 一旦发现该消息队列里收<br>到了新的消息，就会去对消息进行处理，处理过程中会回调自身Handler的heandleMessage<br>方法。从而实现了不同线程间通信。</p>
+<p>###2、Looper实现原理<br>Looper类里包含一个消息队列对象和一个线程对象。当创建Looper时，会自动创建一个<br>消息队列，同时将内部线程对象指向创建Looper的线程。当开启Looper后(looper.loop())，<br>会自动进入无限for循环中，不断去遍历消息队列，如果没有消息则阻塞，有消息则回调<br>handler的handlemessage方法进行处理。</p>
+<p>###3、Looper.prepare()<br>首先，要使用Looper机制一般会在当前线程中创建Handler对象，里面会自动创建一个<br>looper对象和消息队列，这里面的消息队列属于当前线程空间。但此时的looper还不会去遍历，<br>也没有绑定到当前线程。其中，looper对象内部也包含一个空消息队列对象和空线程。<br>通过Looper.prepare()方法，先让该消息队列指向当前线程的消息队列，让空线程也指向当前线程。从而实现了绑定。</p>
 
       
     </div>
@@ -112,10 +111,8 @@
           <div class="clearfix"></div>
           <nav id="pagination">
   
-    <a href="/2016/04/01/android-looper/" class="alignleft prev"><i class="fa fa-long-arrow-left"></i>Next</a>
   
-  
-    <a href="/2016/03/29/hello-world/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+    <a href="/2016/03/29/luffy/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
   
   <div class="clearfix"></div>
 </nav>
@@ -131,7 +128,7 @@
 
   
       <!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-thread-key="/2016/03/29/luffy/"></div>
+<div class="ds-thread" data-thread-key="/2016/04/01/android-looper/"></div>
 <!-- Duoshuo Comment END -->
   
 </section>
